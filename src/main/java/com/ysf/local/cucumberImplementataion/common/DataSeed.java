@@ -22,7 +22,7 @@ public class DataSeed {
 	public void createsAccounts() {
 		for (int i = 0; i < 20; i++) {
 			repos.save(new Account(faker.number().randomNumber() , faker.name().name() 
-									,faker.random().nextDouble() ,LocalDateTime.now() ));
+									,faker.random().nextDouble()+1000 ,LocalDateTime.now() ));
 		}
 	}
 }

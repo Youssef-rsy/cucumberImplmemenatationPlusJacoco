@@ -11,6 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 @EntityScan(basePackages = "com.ysf.local.cucumberImplementataion")
 @EnableJpaRepositories
 @DataJpaTest
-@ActiveProfiles("TEST")
+//@ActiveProfiles("TEST")
 public class ApplicationTestConfig {
 }

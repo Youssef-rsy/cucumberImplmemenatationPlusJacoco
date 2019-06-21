@@ -46,8 +46,7 @@ public class AccountServiceImpl implements AccountService {
 	public Account credit(Long accountId, Double balance) throws AccountException {
 		account =  getAccount(accountId);
 		account.setBalance(account.getBalance()+balance);
-		
-		return null;
+		return account;
 	}
 
 	@Override
