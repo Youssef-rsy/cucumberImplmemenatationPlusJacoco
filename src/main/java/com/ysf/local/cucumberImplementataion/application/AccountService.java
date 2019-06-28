@@ -12,5 +12,6 @@ public interface AccountService {
 	public Account getAccount(Long accountId) throws AccountException;
 	public Account credit(Long id , Double balance) throws AccountException;
 	public Account debit(Long id , Double balance) throws AccountException;
+	public void delete(Long id);
 
 }

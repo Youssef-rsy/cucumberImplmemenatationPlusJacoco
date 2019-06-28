@@ -3,6 +3,8 @@ package com.ysf.local.cucumberImplementataion.exposition;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import com.ysf.local.cucumberImplementataion.domaine.Account;
 
 @RestController
 @RequestMapping("/account")
+@CrossOrigin(value="*")
 public class AccountController {
 
 	@Autowired
@@ -30,7 +33,7 @@ public class AccountController {
 		return accounts;
 	}
 	
-	@PostMapping
+	@PostMapping()
 	public Account createAccount(@RequestBody Account account) throws AccountException {
 		account =  accountService.createAccount(account);
 		return account;
@@ -51,6 +54,12 @@ public class AccountController {
 	public Account debit(@PathVariable Long id ,@PathVariable Double balance)  throws AccountException{
 		account =  accountService.debit(id, balance);
 		return account;
+	}
+	
+	@DeleteMapping("/{id}")
+	public List<Account> debit(@PathVariable Long id )  throws AccountException{
+		 accountService.delete(id);
+		return  accountService.accounts();
 	}
 	
 	
