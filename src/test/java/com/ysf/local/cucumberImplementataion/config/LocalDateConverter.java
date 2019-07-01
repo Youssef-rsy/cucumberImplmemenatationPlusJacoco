@@ -10,23 +10,22 @@ import cucumber.deps.com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import cucumber.deps.com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 public class LocalDateConverter implements Converter{
-
-    public boolean canConvert(Class type) {
+	public boolean canConvert(Class type) {
         //return type.equals(LocalDate.class);
         return LocalDateTime.class.isAssignableFrom(type);
     }
 
-    /*private static final String            DEFAULT_DATE_PATTERN = "dd-MM-yyyy";
-    private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern(DateTimeFormatter.ISO_DATE_TIME.toString());*/
+    private static final String            DEFAULT_DATE_PATTERN = "YYYY-MM-DD'T'hh:mm:ss";
+    private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATE_PATTERN);
 
     public void marshal(Object value, HierarchicalStreamWriter writer, MarshallingContext context) {
     	LocalDateTime  date = (LocalDateTime) value;
-        String result = date.format(DateTimeFormatter.ISO_DATE_TIME);
+        String result = date.format(DEFAULT_DATE_FORMATTER);
         writer.setValue(result);
     }
 
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-    	LocalDateTime result = LocalDateTime.parse(reader.getValue(), DateTimeFormatter.ISO_DATE_TIME);
+    	LocalDateTime result = LocalDateTime.parse(reader.getValue(), DEFAULT_DATE_FORMATTER);
         return result;
     }
 

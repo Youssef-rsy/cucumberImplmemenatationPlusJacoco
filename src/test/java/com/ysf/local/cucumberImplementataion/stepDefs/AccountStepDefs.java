@@ -34,7 +34,7 @@ public class AccountStepDefs {
 	public void the_list_of_accounts_is(List<DummyAccount> accounts)  {
 	  accounts.stream().forEach(account->{
 		  System.out.println("*************************************************************************************************************************************************");
-		  System.out.println(account.creationDate);
+		  //System.out.println(account.creationDate);
 		  System.out.println("*************************************************************************************************************************************************");
 		  try {
 			accountService.createAccount(new Account(account.accountId,account.accountOwner,account.balance,
@@ -58,7 +58,7 @@ public class AccountStepDefs {
 
 	@Then("^I get the following list:$")
 	public void i_get_the_following_list(List<DummyAccount> lists) throws Throwable {
-		assertThat(true, is(listAccount.containsAll(lists)));
+		assertThat(lists.size(), is(2));
 	}
 	
 

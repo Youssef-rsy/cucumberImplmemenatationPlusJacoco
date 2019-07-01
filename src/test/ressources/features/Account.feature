@@ -8,18 +8,18 @@ Feature: Manage Account
 
   Background: 
     Given the list of accounts is:
-      | accountId | accountOwner | balance  |creationDate		|
-      |         1 | user1        |  1500.99 |2018-06-21T20:15:30|
-      |         2 | user2        | 12000.12 |2019-06-21T20:15:30|
+      | accountId | accountOwner | balance  |
+      |         1 | user1        |  1500.99 |
+      |         2 | user2        | 12000.12 |
 
  @admin
  Scenario:
  	Given I'm connected as Admin
  	When T want to list all accounts
  	Then I get the following list:
-      | accountId | accountOwner | balance  |creationDate		|
-      |         1 | user1        |  1500.99 |2018-06-21T20:15:30|
-      |         2 | user2        | 12000.12 |2019-06-21T20:15:30|
+      | accountId | accountOwner | balance  |
+      |         1 | user1        |  1500.99 |
+      |         2 | user2        | 12000.12 |
 
 
   @credit
