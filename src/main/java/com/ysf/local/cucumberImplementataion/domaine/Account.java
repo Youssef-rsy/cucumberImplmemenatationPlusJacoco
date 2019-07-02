@@ -1,15 +1,12 @@
 package com.ysf.local.cucumberImplementataion.domaine;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 /**
@@ -24,7 +21,7 @@ public class Account {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long accountId;
 	private String accountOwner;
-	private Double balance;
+	private BigDecimal balance;
 	private LocalDateTime creationDate;
 	
 	
@@ -34,7 +31,7 @@ public class Account {
 	}
 	
 	
-	public Account(String accountOwner, Double balance, LocalDateTime creationDate) {
+	public Account(String accountOwner, BigDecimal balance, LocalDateTime creationDate) {
 		super();
 		this.accountOwner = accountOwner;
 		this.balance = balance;
@@ -42,7 +39,7 @@ public class Account {
 	}
 
 
-	public Account(Long accountId, String accountOwner, Double balance, LocalDateTime creationDate) {
+	public Account(Long accountId, String accountOwner, BigDecimal balance, LocalDateTime creationDate) {
 		super();
 		this.accountId = accountId;
 		this.accountOwner = accountOwner;
@@ -63,10 +60,10 @@ public class Account {
 	public void setAccountOwner(String accountOwner) {
 		this.accountOwner = accountOwner;
 	}
-	public Double getBalance() {
+	public BigDecimal getBalance() {
 		return balance;
 	}
-	public void setBalance(Double balance) {
+	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
 	public LocalDateTime getCreationDate() {

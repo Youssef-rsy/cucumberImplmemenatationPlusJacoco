@@ -1,8 +1,7 @@
 package com.ysf.local.cucumberImplementataion.application;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 import javax.transaction.Transactional;
 
@@ -43,17 +42,17 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account credit(Long accountId, Double balance) throws AccountException {
+	public Account credit(Long accountId, BigDecimal amount) throws AccountException {
 		account =  getAccount(accountId);
-		account.setBalance(account.getBalance()+balance);
+		account.setBalance(account.getBalance().add(amount));
 		return account;
 	}
 
 	@Override
-	public Account debit(Long accountId, Double balance) throws AccountException{
+	public Account debit(Long accountId, BigDecimal amount) throws AccountException{
 		account =  getAccount(accountId);
-		double accountBalance = account.getBalance()-balance;
-		if (accountBalance>=0)
+		BigDecimal accountBalance = account.getBalance().subtract(amount);
+		if (accountBalance.doubleValue()>=0)
 			account.setBalance(accountBalance);
 		else
 			throw new AccountException("unsatisfactory balance to perform this operation");

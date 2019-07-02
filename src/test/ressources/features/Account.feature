@@ -8,18 +8,18 @@ Feature: Manage Account
 
   Background: 
     Given the list of accounts is:
-      | accountId | accountOwner | balance  |
-      |         1 | user1        |  1500.99 |
-      |         2 | user2        | 12000.12 |
+      | accountId | accountOwner | balance  |creationDate						|
+      |         1 | user1        |  1500.99 |2019-07-02T13:48:54.569|
+      |         2 | user2        | 12000.12 |2019-07-02T13:48:54.569|
 
  @admin
  Scenario:
  	Given I'm connected as Admin
  	When T want to list all accounts
  	Then I get the following list:
-      | accountId | accountOwner | balance  |
-      |         1 | user1        |  1500.99 |
-      |         2 | user2        | 12000.12 |
+      | accountId | accountOwner | balance  |creationDate						|
+      |         1 | user1        |  1500.99 |2019-07-02T13:48:54.569|
+      |         2 | user2        | 12000.12 |2019-07-02T13:48:54.569|
 
 
   @credit
@@ -33,6 +33,12 @@ Feature: Manage Account
  	Given I'm connected as user2
  	When I try to retreive 2000.12 fromthe account id 2
  	Then the amount will become 10000.00
+ 	
+ 	@debit
+  Scenario:
+ 	Given I'm connected as user2
+ 	When I try to retreive 1500 fromthe account id 1
+ 	Then the amount will become 0.99
  	
   @unauthorizeRequest
   Scenario: unsatisfactory balance

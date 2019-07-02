@@ -1,25 +1,28 @@
 package com.ysf.local.cucumberImplementataion.stepDefs;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.ysf.local.cucumberImplementataion.ApplicationTestConfig;
 import com.ysf.local.cucumberImplementataion.application.AccountService;
 import com.ysf.local.cucumberImplementataion.common.AccountException;
 import com.ysf.local.cucumberImplementataion.domaine.Account;
-import com.ysf.local.cucumberImplementataion.infrastricture.AccountsRepository;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import net.bytebuddy.asm.Advice.Local;
 
 @ContextConfiguration(classes = ApplicationTestConfig.class)
 public class AccountStepDefs {
@@ -33,12 +36,10 @@ public class AccountStepDefs {
 	@Given("^the list of accounts is:$")
 	public void the_list_of_accounts_is(List<DummyAccount> accounts)  {
 	  accounts.stream().forEach(account->{
-		  System.out.println("*************************************************************************************************************************************************");
-		  //System.out.println(account.creationDate);
-		  System.out.println("*************************************************************************************************************************************************");
+		  LocalDateTime creationDate = LocalDateTime.parse(account.creationDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 		  try {
 			accountService.createAccount(new Account(account.accountId,account.accountOwner,account.balance,
-							LocalDateTime.now()));
+					creationDate));
 		} catch (AccountException e) {
 			e.printStackTrace();
 		}
@@ -68,27 +69,27 @@ public class AccountStepDefs {
 	}
 
 	@When("^I try to deposit (\\d+.\\d+) to the account id (\\d+)$")
-	public void i_try_to_deposit_to_the_account_id(double balance, long id) throws Throwable {
+	public void i_try_to_deposit_to_the_account_id(BigDecimal balance, long id) throws Throwable {
 		account = accountService.credit(id,balance);
 	}
 
 	@Then("^the amount of account becomes as bellow (\\d+.\\d+)$")
-	public void the_amount_of_account_becomes_as_bellow(double newBalance) throws Throwable {
-		assertThat(newBalance,is(account.getBalance().doubleValue()));
+	public void the_amount_of_account_becomes_as_bellow(BigDecimal newBalance) throws Throwable {
+		assertThat(newBalance,is( account.getBalance()));
 	}
 	
 	@When("^I try to retreive (\\d+.\\d+) fromthe account id (\\d+)$")
-	public void i_try_to_retreive_fromthe_account_id(double balance, long id) throws Throwable {
+	public void i_try_to_retreive_fromthe_account_id(BigDecimal balance, long id) throws Throwable {
 		account =  accountService.debit(id, balance);
 	}
 
 	@Then("^the amount will become (\\d+.\\d+)$")
-	public void the_amount_will_become(double newBalance) throws Throwable {
-		assertThat(newBalance,is(account.getBalance().doubleValue()));
+	public void the_amount_will_become(BigDecimal newBalance) throws Throwable {
+		assertThat(newBalance, Matchers.comparesEqualTo(account.getBalance()) );
 	}	
 	
 	@When("^I try to retreive (\\d+.\\d+) from the account id (\\d+)$")
-	public void i_try_to_retreive_from_the_account_id(double balance, long id) throws AccountException {
+	public void i_try_to_retreive_from_the_account_id(BigDecimal balance, long id) throws AccountException {
 			try{
 				accountService.debit(id, balance);
 			}catch (AccountException e) {
@@ -104,7 +105,7 @@ public class AccountStepDefs {
 	class DummyAccount{
 		 Long accountId;
 		 String accountOwner;
-		 Double balance;
-		 LocalDateTime creationDate;
+		 BigDecimal balance;
+		 String creationDate;
 	}
 }
