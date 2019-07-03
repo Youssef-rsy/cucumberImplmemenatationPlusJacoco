@@ -3,10 +3,12 @@ package com.ysf.local.cucumberImplementataion.domaine;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 
 /**
@@ -18,10 +20,17 @@ import javax.persistence.Id;
 public class Account {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="account_seq")
+	@SequenceGenerator(name="account_seq",sequenceName="account_seq", allocationSize=1)
+	@Column(name="account_id")
 	private Long accountId;
+	
+	@Column(name="account_owner")
 	private String accountOwner;
+	
 	private BigDecimal balance;
+	
+	@Column(name="creation_date")
 	private LocalDateTime creationDate;
 	
 	

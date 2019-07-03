@@ -1,5 +1,6 @@
 package com.ysf.local.cucumberImplementataion.exposition;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +46,13 @@ public class AccountController {
 	}
 	
 	@PutMapping("/credit/{id}/{balance}")
-	public Account credit(@PathVariable Long id , @PathVariable Double balance)  throws AccountException{
+	public Account credit(@PathVariable Long id , @PathVariable BigDecimal balance)  throws AccountException{
 		account =  accountService.credit(id, balance);
 		return account;
 	}
 	
 	@PutMapping("/debit/{id}/{balance}")
-	public Account debit(@PathVariable Long id ,@PathVariable Double balance)  throws AccountException{
+	public Account debit(@PathVariable Long id ,@PathVariable BigDecimal balance)  throws AccountException{
 		account =  accountService.debit(id, balance);
 		return account;
 	}
