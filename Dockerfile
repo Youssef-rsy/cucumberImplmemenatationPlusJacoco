@@ -1,7 +1,7 @@
 # Start with a base image containing Java runtime java8 
 FROM openjdk:8
 
-RUN apt-get update && apt-get install maven
+RUN apt-get update && apt-get -y install  maven
 
 # Add Maintainer Info
 LABEL maintainer="youssef.rsy@gmail.com"
