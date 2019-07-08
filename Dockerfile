@@ -1,7 +1,10 @@
 # Start with a base image containing Java runtime java8 
 FROM openjdk:8
 
-RUN apt-get update && apt-get -y install  maven && mvn clean install
+RUN apt-get update && apt-get -y install  maven 
+
+#MAVEN COMMAND TO GENERATE THE JAR
+RUN mvn clean install
 
 # Add Maintainer Info
 LABEL maintainer="youssef.rsy@gmail.com"
