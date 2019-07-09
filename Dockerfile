@@ -2,7 +2,7 @@
 
 FROM maven:3.5-jdk-8-alpine as build 
 WORKDIR /app
-COPY --from=/cucumberImplmemenatationPlusJacocoPlusFlyway /app 
+COPY /cucumberImplmemenatationPlusJacocoPlusFlyway /app 
 RUN mvn install
 
 # run app
