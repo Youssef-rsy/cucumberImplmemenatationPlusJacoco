@@ -12,4 +12,4 @@ WORKDIR /app
 EXPOSE 9999
 ARG JAR_FILE=target/accountService.jar
 COPY --from=build /app/${JAR_FILE} /app
-CMD ["java", "-jar" , "/accountService.jar"]
+CMD ["java", "-jar" , "/app/accountService.jar"]
