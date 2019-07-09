@@ -5,6 +5,6 @@ WORKDIR /app
 COPY / /app
 RUN mvn -X install
 ARG JAR_FILE=target/accountService.jar
-ADD ${JAR_FILE} accountService.jar
+ADD /${JAR_FILE} accountService.jar
 EXPOSE 9999
 ENTRYPOINT ["java" , "-jar" , "/app/accountService.jar"]
