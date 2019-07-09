@@ -1,7 +1,7 @@
 # build project 
 
 FROM maven:3.5-jdk-8-alpine as build 
-#WORKDIR /app
+WORKDIR /
 RUN mvn -X install
 ARG JAR_FILE=target/accountService.jar
 ADD ${JAR_FILE} accountService.jar
