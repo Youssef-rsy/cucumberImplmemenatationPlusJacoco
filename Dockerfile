@@ -2,7 +2,7 @@
 
 FROM maven:3.5-jdk-8-alpine as build 
 WORKDIR /app
-RUN mvn install
+RUN mvn -X install
 EXPOSE 9999
 ARG JAR_FILE=target/accountService.jar
 COPY  /${JAR_FILE} /app
