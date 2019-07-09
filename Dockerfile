@@ -1,15 +1,8 @@
-# clone repos
-
-FROM alpine/git as clone 
-WORKDIR /app
-ARG GIT_REPO = https://github.com/Youssef-rsy/cucumberImplmemenatationPlusJacocoPlusFlyway.git
-RUN git clone ${GIT_REPO}
-
 # build project 
 
 FROM maven:3.5-jdk-8-alpine as build 
 WORKDIR /app
-COPY --from=gitImg /app/cucumberImplmemenatationPlusJacocoPlusFlyway /app 
+COPY --from=/cucumberImplmemenatationPlusJacocoPlusFlyway /app 
 RUN mvn install
 
 # run app
